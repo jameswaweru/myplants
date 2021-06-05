@@ -10,24 +10,24 @@ class OnBoardingContent {
 
 List<OnBoardingContent> contents = [
   OnBoardingContent(
-      title: 'Quality Food',
+      title: 'Plant Trees',
       image: 'assets/onboard3.jpg',
-      discription: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
-          "industry's standard dummy text ever since the 1500s, "
-          "when an unknown printer took a galley of type and scrambled it "
+      discription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit enim elit, vel congue mi hendrerit in."
+          " Suspendisse convallis, lorem sit amet auctor tincidunt, arcu ante elementum diam, at ultricies mauris risus sed "
+          "nibh. Morbi in imperdiet libero. Vestibulum vel turpis ut augue hendrerit ultricies."
   ),
   OnBoardingContent(
-      title: 'Fast Delevery',
+      title: 'Free Updates',
       image: 'assets/onboard1.jpg',
-      discription: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
-          "industry's standard dummy text ever since the 1500s, "
-          "when an unknown printer took a galley of type and scrambled it "
+      discription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit enim elit, vel congue mi hendrerit in."
+          " Suspendisse convallis, lorem sit amet auctor tincidunt, arcu ante elementum diam, at ultricies mauris risus sed "
+          "nibh. Morbi in imperdiet libero. Vestibulum vel turpis ut augue hendrerit ultricies."
   ),
   OnBoardingContent(
-      title: 'Reward surprises',
+      title: 'Easy Tracking',
       image: 'assets/onboard4.jpg',
-      discription: "simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "
-          "industry's standard dummy text ever since the 1500s, "
-          "when an unknown printer took a galley of type and scrambled it "
+      discription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit enim elit, vel congue mi hendrerit in."
+          " Suspendisse convallis, lorem sit amet auctor tincidunt, arcu ante elementum diam, at ultricies mauris risus sed "
+          "nibh. Morbi in imperdiet libero. Vestibulum vel turpis ut augue hendrerit ultricies."
   ),
 ];

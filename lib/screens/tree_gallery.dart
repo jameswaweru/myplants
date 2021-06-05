@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_plants/components/gallery_container.dart';
+import 'package:my_plants/constants/utils.dart';
 import 'package:my_plants/models/tree_photo.dart';
 
 class GalleryPage extends StatefulWidget {
@@ -19,38 +20,38 @@ class GalleryPage extends StatefulWidget {
 
 class _GalleryPageState extends State<GalleryPage> {
 
-  List<Photo> photos = [];
-
-  Future<List<Photo>> getPhotos() async {
-
-    var queryParameters = {
-      'client_id': 'cKakzKM1cx44BUYBnEIrrgN_gnGqt81UcE7GstJEils',
-      'per_page': '30',
-      'orientation':'portrait',
-      'page':'1',
-      'query':widget.plantName,
-    };
-    var uri =
-    Uri.https('api.unsplash.com', '/search/photos', queryParameters);
-
-    var response = await http.get(uri, headers: {
-      // HttpHeaders.authorizationHeader: 'Token $token',
-      HttpHeaders.contentTypeHeader: 'application/json',
-    });
-
-    var jsonData = jsonDecode(response.body);
-
-    var results = jsonData['results'];
-
-    for (var r in results){
-
-      Photo photo = Photo(r["urls"]["small"], r["user"]["first_name"] , r["user"]["links"]["html"]);
-      photos.add(photo);
-    }
-
-    print("apiResponse length:"+photos.length.toString());
-    return photos;
-  }
+  // List<Photo> photos = [];
+  //
+  // Future<List<Photo>> getPhotos() async {
+  //
+  //   var queryParameters = {
+  //     'client_id': 'cKakzKM1cx44BUYBnEIrrgN_gnGqt81UcE7GstJEils',
+  //     'per_page': '30',
+  //     'orientation':'portrait',
+  //     'page':'1',
+  //     'query':widget.plantName,
+  //   };
+  //   var uri =
+  //   Uri.https('api.unsplash.com', '/search/photos', queryParameters);
+  //
+  //   var response = await http.get(uri, headers: {
+  //     // HttpHeaders.authorizationHeader: 'Token $token',
+  //     HttpHeaders.contentTypeHeader: 'application/json',
+  //   });
+  //
+  //   var jsonData = jsonDecode(response.body);
+  //
+  //   var results = jsonData['results'];
+  //
+  //   for (var r in results){
+  //
+  //     Photo photo = Photo(r["urls"]["small"], r["user"]["first_name"] , r["user"]["links"]["html"]);
+  //     photos.add(photo);
+  //   }
+  //
+  //   print("apiResponse length:"+photos.length.toString());
+  //   return photos;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class _GalleryPageState extends State<GalleryPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: FutureBuilder(
-            future: getPhotos(),
+            future: getPhotos(widget.plantName),
             builder: (BuildContext context, AsyncSnapshot snapshot){
               if(snapshot.data == null){
                 return Container(
@@ -78,9 +79,9 @@ class _GalleryPageState extends State<GalleryPage> {
                   scrollDirection: Axis.vertical,
                   physics: ScrollPhysics(),
                   crossAxisCount: 4,
-                  itemCount: photos.length,
+                  itemCount: snapshot.data.length,
                   shrinkWrap: true,
-                  itemBuilder: (context , index) => GalleryContainer(index , photos[index]),
+                  itemBuilder: (context , index) => GalleryContainer(index , snapshot.data[index]),
                   staggeredTileBuilder: (int index) =>
                   new StaggeredTile.fit(2),
                   mainAxisSpacing: 10,

@@ -1,17 +1,48 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:my_plants/models/planted_tree.dart';
+import 'package:my_plants/models/tree.dart';
+import 'package:my_plants/models/tree.dart';
+import 'package:my_plants/models/tree.dart';
 import 'package:my_plants/screens/DetailPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class PlantCard extends StatelessWidget {
-  PlantedTree plantedTree = PlantedTree("plantId", "name", "description", 120, 3, "https://upload.wikimedia.org/wikipedia/commons/5/51/A_scene_of_Coriander_leaves.JPG", "wikipediaLink", "Mar 25, 2021");
+  //Tree plantedTree = PlantedTree("plantId", "name", "description", 120, 3, "https://upload.wikimedia.org/wikipedia/commons/5/51/A_scene_of_Coriander_leaves.JPG", "wikipediaLink", "Mar 25, 2021");
+  Tree tree;
+  PlantCard(this.tree);
+
+  bool isPlantAdded = false;
+
+  Future<bool> _isItPlanted(Tree selectedPlant)  async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String plantedPlantsString = prefs.getString("plantedPlantsJsonString") ?? "";
+    if(plantedPlantsString.isNotEmpty){
+      var plantsObjsJson = jsonDecode(plantedPlantsString)as List;
+      List<PlantedTree> plantedTrees= plantsObjsJson.map((plantJson) => PlantedTree.fromJson(plantJson)).toList();
+      if(plantedTrees.length > 0){
+        for(var i=0;i<plantedTrees.length;i++){
+          if(plantedTrees[i].plantId == selectedPlant.plantId){
+            isPlantAdded = true;
+          }
+        }
+      }
+    }
+    print("plant is added results:"+isPlantAdded.toString());
+    return isPlantAdded;
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return DetailPage(plantedTree);
-        }));
+        this._isItPlanted(tree).whenComplete(() =>
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return DetailPage(tree , isPlantAdded );
+            }))
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -31,16 +62,16 @@ class PlantCard extends StatelessWidget {
                 width: 160,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/1/17/Cherry_tomatoes_red_and_green_2009_16x9.jpg"),
+                        image: NetworkImage(tree.imageUrl),
                         fit: BoxFit.cover
                     )
                 ),
               ),
             ),
             SizedBox(height: 5,),
-            Text("Tree Name" , textAlign: TextAlign.start,),
+            Text(tree.name , textAlign: TextAlign.start,),
             SizedBox(height: 5,),
-            Text("Watered after 7 days" , textAlign: TextAlign.start,),
+            Text("Watered after every "+tree.wateringInterval.toString()+" days" , style: TextStyle(fontSize: 10), textAlign: TextAlign.start,),
           ],
         ),
       ),

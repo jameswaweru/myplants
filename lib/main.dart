@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_plants/screens/home.dart';
 import 'package:my_plants/screens/launch_screen.dart';
+import 'package:my_plants/screens/notifications.dart';
 
 import 'constants/constants.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity
       ),
       home: LaunchScreen(),
+      // home: Notifications(),
     );
   }
 }

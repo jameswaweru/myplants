@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_plants/constants/constants.dart';
+import 'package:my_plants/screens/notifications.dart';
 
 class HomeToolBar extends StatelessWidget {
 
@@ -30,7 +31,7 @@ class HomeToolBar extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 40,),
+                    SizedBox(height: 46,),
                     Text(
                       'My Plants',
                       style: TextStyle(
@@ -50,33 +51,42 @@ class HomeToolBar extends StatelessWidget {
                     ),
                   ],
                 ),
-                Stack(
-                  children: [
-                    Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/notification.png"),
-                                fit: BoxFit.contain
-                            ),
-                            borderRadius: BorderRadius.circular(100)
-                        )
-                    ),
-                    Positioned(
-                        right: 5,
-                        top: 0,
-                        child: Container(
-                          height: 10,
-                          width: 10,
+
+                InkWell(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                      return Notifications();
+                    }));
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                          height: 35,
+                          width: 35,
                           decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(20)
-                          ),
-                        )
-                    )
-                  ],
+                              image: DecorationImage(
+                                  image: AssetImage("assets/notification.png"),
+                                  fit: BoxFit.contain
+                              ),
+                              borderRadius: BorderRadius.circular(100)
+                          )
+                      ),
+                      Positioned(
+                          right: 5,
+                          top: 0,
+                          child: Container(
+                            height: 10,
+                            width: 10,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                          )
+                      )
+                    ],
+                  ),
                 )
+
               ],
             ),
           ),

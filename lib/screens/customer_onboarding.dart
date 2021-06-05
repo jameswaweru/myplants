@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:my_plants/components/splash_content.dart';
 import 'package:my_plants/constants/constants.dart';
+import 'package:my_plants/models/planted_tree.dart';
 import 'package:my_plants/utils/size_config.dart';
 import 'package:my_plants/models/onboarding_content.dart';
 import 'package:my_plants/screens/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoarding extends StatefulWidget {
   @override
@@ -15,11 +17,24 @@ class _OnBoardingState extends State<OnBoarding> {
 
   int currentIndex = 0;
   late PageController _controller;
+  List<PlantedTree> plantedTrees = [];
 
   @override
   void initState() {
     _controller = PageController(initialPage: 0);
     super.initState();
+  }
+
+  _loginCustomer() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('isNewUser', "No").whenComplete(() =>
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => Home(plantedTrees),
+          ),
+        )
+    );
   }
 
   @override
@@ -118,17 +133,13 @@ class _OnBoardingState extends State<OnBoarding> {
                       currentIndex == contents.length - 1 ? "Continue" : "Next"),
                   onPressed: () {
                     if (currentIndex == contents.length - 1) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => Home(),
-                        ),
+                      _loginCustomer();
+                    }else{
+                      _controller.nextPage(
+                        duration: Duration(milliseconds: 100),
+                        curve: Curves.bounceIn,
                       );
                     }
-                    _controller.nextPage(
-                      duration: Duration(milliseconds: 100),
-                      curve: Curves.bounceIn,
-                    );
                   },
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
