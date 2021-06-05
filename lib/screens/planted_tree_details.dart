@@ -99,7 +99,7 @@ class _PlantedTreeDetailsState extends State<PlantedTreeDetails> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildUserInfo(),
+            _buildPlantsInfo(),
             Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 15,
@@ -172,7 +172,7 @@ class _PlantedTreeDetailsState extends State<PlantedTreeDetails> {
     );
   }
 
-  Widget _buildUserInfo() {
+  Widget _buildPlantsInfo() {
 
     DateTime now = new DateTime.now();
 

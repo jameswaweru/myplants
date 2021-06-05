@@ -9,7 +9,6 @@ import 'package:my_plants/models/tree.dart';
 import 'package:my_plants/models/tree_photo.dart';
 import 'package:my_plants/screens/tree_gallery.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/TravelBean.dart';
 import 'home.dart';
 
 
@@ -99,7 +98,7 @@ class _DetailPageState extends State<DetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildUserInfo(),
+            _buildPlantsInfo(),
             Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 15,
@@ -178,7 +177,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Widget _buildUserInfo() {
+  Widget _buildPlantsInfo() {
 
     // DateTime now = new DateTime.now();
     // int actualNextWateringDay = widget.tree.

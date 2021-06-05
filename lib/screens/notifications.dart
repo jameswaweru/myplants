@@ -64,11 +64,6 @@ class _NotificationsState extends State<Notifications> {
     );
   }
 
-  // Widget wateringDueText(){
-  //
-  //   //return Text();
-  // }
-  
   Widget noNotificationsWidget(double height){
     return Container(
       height: height,

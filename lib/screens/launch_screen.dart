@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
-
-
 import 'package:flutter/material.dart';
 import 'package:my_plants/constants/constants.dart';
 import 'package:my_plants/models/planted_tree.dart';

@@ -1,12 +1,9 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_plants/components/home_page_toolbar.dart';
 import 'package:my_plants/components/no_plants_found.dart';
 import 'package:my_plants/components/plant_card.dart';
 import 'package:my_plants/components/planted_tree.dart';
-import 'package:my_plants/constants/constants.dart';
 import 'package:my_plants/models/planted_tree.dart';
 import 'package:my_plants/models/tree.dart';
 import 'package:shared_preferences/shared_preferences.dart';
